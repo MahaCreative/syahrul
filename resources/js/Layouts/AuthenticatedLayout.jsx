@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 
-import { Link, usePage } from "@inertiajs/react";
+import { Head, Link, usePage } from "@inertiajs/react";
 import {
     Favorite,
     Group,
@@ -16,7 +16,7 @@ import {
 } from "@mui/icons-material";
 import MenuAdmin from "@/Components/MenuAdmin";
 
-export default function Authenticated({ children }) {
+export default function Authenticated({ children, title }) {
     const [openSidebar, setOpenSidebar] = useState(false);
     const sidbearRef = useRef();
     const { studio } = usePage().props;
@@ -36,6 +36,7 @@ export default function Authenticated({ children }) {
     return (
         <div className="min-h-screen bg-gray-100 relative">
             {/* narbar logo */}
+            <Head title={title} />
             <div className="bg-black py-2 px-16 w-full relative z-[99999]">
                 <div className="flex gap-3 items-center">
                     <button

@@ -114,20 +114,24 @@ export default function Show(props) {
                 ) : (
                     <>
                         {pesanan.status_pembayaran == "belum lunas" && (
-                            <div className="flex gap-3">
-                                <button
-                                    onClick={() => deleteHandler(row)}
-                                    className="text-white py-1 px-3 bg-red-500"
-                                >
-                                    Hapus
-                                </button>
-                                <button
-                                    onClick={() => editHandler(row)}
-                                    className="text-white py-1 px-3 bg-orange-500"
-                                >
-                                    Edit
-                                </button>
-                            </div>
+                            <>
+                                {row.status_pesanan_paket !== "di terima" && (
+                                    <div className="flex gap-3">
+                                        <button
+                                            onClick={() => deleteHandler(row)}
+                                            className="text-white py-1 px-3 bg-red-500"
+                                        >
+                                            Hapus
+                                        </button>
+                                        <button
+                                            onClick={() => editHandler(row)}
+                                            className="text-white py-1 px-3 bg-orange-500"
+                                        >
+                                            Edit
+                                        </button>
+                                    </div>
+                                )}
+                            </>
                         )}
                     </>
                 ),
@@ -573,12 +577,19 @@ export default function Show(props) {
                                         Batalkan Pesanan
                                     </button>
                                     {pesanan.aktif_payment == "ya" && (
-                                        <button
-                                            onClick={() => checkout(pesanan)}
-                                            className="bg-blue-500 text-white my-2 py-2 px-4 text-center w-full"
-                                        >
-                                            Bayar Sekarang
-                                        </button>
+                                        <>
+                                            {pesanan.status_pembayaran !==
+                                                "lunas" && (
+                                                <button
+                                                    onClick={() =>
+                                                        checkout(pesanan)
+                                                    }
+                                                    className="bg-blue-500 text-white my-2 py-2 px-4 text-center w-full"
+                                                >
+                                                    Bayar Sekarang
+                                                </button>
+                                            )}
+                                        </>
                                     )}
                                 </div>
                             )}

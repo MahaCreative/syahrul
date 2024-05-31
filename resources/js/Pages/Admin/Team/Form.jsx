@@ -124,7 +124,7 @@ export default function Form({ onClose, model, setModel }) {
             className="px-8 md:px-16 lg:px-24 w-full h-full flex overflow-y-auto justify-center items-center
         "
         >
-            <div className="w-full bg-white py-6 px-4 rounded-md  max-h-[90vh] overflow-y-auto">
+            <div className="w-full bg-white py-6 px-4 rounded-md  max-h-[80vh] overflow-y-auto">
                 <h3 className="font-bold text-orange-500 text-base md:text-lg lg:text-xl ">
                     {model ? `Edit Team ${data.nama}` : "Tambah Team"}
                 </h3>

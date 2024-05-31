@@ -14,6 +14,7 @@ use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\TeamController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Pelanggan\DaftarPaketController;
+use App\Http\Controllers\Pelanggan\GaleryController as PelangganGaleryController;
 use App\Http\Controllers\Pelanggan\HomeController;
 use App\Http\Controllers\Pelanggan\PaymentPesananController;
 use App\Http\Controllers\Pelanggan\PesananController;
@@ -41,7 +42,7 @@ use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 Route::get('', [HomeController::class, 'index'])->name('home');
 Route::post('ulasan', [UlasanStudio::class, 'store'])->name('store-ulasan-studio');
 Route::get('daftar-paket', [DaftarPaketController::class, 'index'])->name('daftar-paket');
-Route::get('galery', [Galery::class, 'index'])->name('galery');
+Route::get('galery', [PelangganGaleryController::class, 'index'])->name('galery');
 
 
 Route::middleware(['guest'])->group(function () {

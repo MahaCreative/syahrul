@@ -120,47 +120,112 @@ export default function Form({ model, onClose, setModel }) {
     console.log(model);
 
     return (
-        <div className="px-8 md:px-16 lg:px-24 ">
-            <div className="w-full bg-white py-6 px-4 rounded-md">
-                <form
-                    onSubmit={model ? updateHandler : submitHandler}
-                    className="flex flex-col gap-3 w-full"
-                >
-                    <InputText
-                        required
-                        className="w-full"
-                        title={"Nama Depan"}
-                        name={"first_name"}
-                        errors={errors.first_name}
-                        value={data.first_name}
-                        onChange={(e) =>
-                            setData({
-                                ...data,
-                                [e.target.name]: e.target.value,
-                            })
-                        }
-                    />
-                    <InputText
-                        className="w-full"
-                        title={"Nama belakang"}
-                        name={"last_name"}
-                        errors={errors.last_name}
-                        value={data.last_name}
-                        onChange={(e) =>
-                            setData({
-                                ...data,
-                                [e.target.name]: e.target.value,
-                            })
-                        }
-                    />
-                    <div className="grid grid-cols-3 gap-4 w-full">
+        <div className="w-full h-screen flex justify-center items-center px-8">
+            <div className="w-full ">
+                <div className="w-full bg-white  px-4 rounded-md py-6">
+                    <form
+                        onSubmit={model ? updateHandler : submitHandler}
+                        className="flex flex-col gap-3 w-full"
+                    >
+                        <InputText
+                            required
+                            className="w-full"
+                            title={"Nama Depan"}
+                            name={"first_name"}
+                            errors={errors.first_name}
+                            value={data.first_name}
+                            onChange={(e) =>
+                                setData({
+                                    ...data,
+                                    [e.target.name]: e.target.value,
+                                })
+                            }
+                        />
+                        <InputText
+                            className="w-full"
+                            title={"Nama belakang"}
+                            name={"last_name"}
+                            errors={errors.last_name}
+                            value={data.last_name}
+                            onChange={(e) =>
+                                setData({
+                                    ...data,
+                                    [e.target.name]: e.target.value,
+                                })
+                            }
+                        />
+                        <div className="grid grid-cols-3 gap-4 w-full">
+                            <InputText
+                                className="w-full block"
+                                title={"Alamat"}
+                                name={"alamat"}
+                                required
+                                errors={errors.alamat}
+                                value={data.alamat}
+                                onChange={(e) =>
+                                    setData({
+                                        ...data,
+                                        [e.target.name]: e.target.value,
+                                    })
+                                }
+                            />
+                            <InputText
+                                className="w-full block"
+                                title={"Telph"}
+                                required
+                                name={"no_telp"}
+                                errors={errors.no_telp}
+                                value={data.no_telp}
+                                onChange={(e) =>
+                                    setData({
+                                        ...data,
+                                        [e.target.name]: e.target.value,
+                                    })
+                                }
+                            />
+                            <InputText
+                                className="w-full block"
+                                title={"Foto"}
+                                type="file"
+                                name={"foto"}
+                                errors={errors.foto}
+                                onChange={(e) =>
+                                    setData({
+                                        ...data,
+                                        [e.target.name]: e.target.files[0],
+                                    })
+                                }
+                            />
+                        </div>
                         <InputText
                             className="w-full block"
-                            title={"Alamat"}
-                            name={"alamat"}
                             required
-                            errors={errors.alamat}
-                            value={data.alamat}
+                            title={"Email"}
+                            name={"email"}
+                            type="email"
+                            errors={errors.email}
+                            value={data.email}
+                            onChange={(e) =>
+                                setData({
+                                    ...data,
+                                    [e.target.name]: e.target.value,
+                                })
+                            }
+                        />
+                        {model && (
+                            <p className="font-bold ">
+                                * Biarkan kosong jika tidak ingin merubah
+                                password
+                            </p>
+                        )}
+                        <InputText
+                            className="w-full block"
+                            required={model ? false : true}
+                            title={"Password"}
+                            name={"password"}
+                            type="password"
+                            errors={errors.password}
+                            value={data.password}
                             onChange={(e) =>
                                 setData({
                                     ...data,
@@ -170,11 +235,11 @@ export default function Form({ model, onClose, setModel }) {
                         />
                         <InputText
                             className="w-full block"
-                            title={"Telph"}
-                            required
-                            name={"no_telp"}
-                            errors={errors.no_telp}
-                            value={data.no_telp}
+                            required={model ? false : true}
+                            title={"Konfirmasi Password"}
+                            name={"password_confirmation"}
+                            type="password_confirmation"
+                            errors={errors.password_confirmation}
                             onChange={(e) =>
                                 setData({
                                     ...data,
@@ -182,86 +247,24 @@ export default function Form({ model, onClose, setModel }) {
                                 })
                             }
                         />
-                        <InputText
-                            className="w-full block"
-                            title={"Foto"}
-                            type="file"
-                            name={"foto"}
-                            errors={errors.foto}
-                            onChange={(e) =>
-                                setData({
-                                    ...data,
-                                    [e.target.name]: e.target.files[0],
-                                })
-                            }
-                        />
-                    </div>
-                    <InputText
-                        className="w-full block"
-                        required
-                        title={"Email"}
-                        name={"email"}
-                        type="email"
-                        errors={errors.email}
-                        value={data.email}
-                        onChange={(e) =>
-                            setData({
-                                ...data,
-                                [e.target.name]: e.target.value,
-                            })
-                        }
-                    />
-                    {model && (
-                        <p className="font-bold ">
-                            * Biarkan kosong jika tidak ingin merubah password
-                        </p>
-                    )}
-                    <InputText
-                        className="w-full block"
-                        required={model ? false : true}
-                        title={"Password"}
-                        name={"password"}
-                        type="password"
-                        errors={errors.password}
-                        value={data.password}
-                        onChange={(e) =>
-                            setData({
-                                ...data,
-                                [e.target.name]: e.target.value,
-                            })
-                        }
-                    />
-                    <InputText
-                        className="w-full block"
-                        required={model ? false : true}
-                        title={"Konfirmasi Password"}
-                        name={"password_confirmation"}
-                        type="password_confirmation"
-                        errors={errors.password_confirmation}
-                        onChange={(e) =>
-                            setData({
-                                ...data,
-                                [e.target.name]: e.target.value,
-                            })
-                        }
-                    />
 
-                    <div className="flex gap-3 items-center">
-                        <button className="bg-blue-500 px-4 text-white py-2 font-bold rounded-md hover:bg-blue-600 transition-all duration-300 ease-in-out">
-                            {model ? "Update User" : "Tambah User"}
-                        </button>
-                        <button
-                            onClick={() => {
-                                onClose(false);
-                                setModel(null);
-                            }}
-                            type="button"
-                            className="bg-red-500 px-4 text-white py-2 font-bold rounded-md hover:bg-red-600 transition-all duration-300 ease-in-out"
-                        >
-                            Cancell
-                        </button>
-                    </div>
-                </form>
+                        <div className="flex gap-3 items-center">
+                            <button className="bg-blue-500 px-4 text-white py-2 font-bold rounded-md hover:bg-blue-600 transition-all duration-300 ease-in-out">
+                                {model ? "Update User" : "Tambah User"}
+                            </button>
+                            <button
+                                onClick={() => {
+                                    onClose(false);
+                                    setModel(null);
+                                }}
+                                type="button"
+                                className="bg-red-500 px-4 text-white py-2 font-bold rounded-md hover:bg-red-600 transition-all duration-300 ease-in-out"
+                            >
+                                Cancell
+                            </button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     );

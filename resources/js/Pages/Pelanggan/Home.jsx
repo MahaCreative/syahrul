@@ -34,7 +34,7 @@ export default function Home(props) {
         infinite: true,
         lazyLoad: true,
         arrows: false,
-        speed: 500,
+
         slidesToShow: ulasan.length < 3 ? ulasan.length : 3,
         autoplay: true,
         speed: 1000,

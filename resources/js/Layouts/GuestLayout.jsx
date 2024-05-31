@@ -86,7 +86,7 @@ export default function Guest({ children, title }) {
                         : "relative bg-black "
                 } w-full py-3 flex justify-between px-8 lg:px-16 items-center transition-all duration-300 py-3"`}
             >
-                <h3 className="capitalize text-white text-4xl font-bold tracking-tighter italic">
+                <h3 className="capitalize text-white text-lg md:text-2xl lg:text-4xl font-bold tracking-tighter italic">
                     {studio.nama_studio}
                 </h3>
                 <div className="flex gap-3">
