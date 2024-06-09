@@ -37,9 +37,9 @@ class PaketBookingController extends Controller
         $attr = $request->validate([
             "nama_paket" => 'required|string|min:6|max:70',
             "lokasi_foto" => 'required',
-            "deskripsi_paket" => 'required|min:50|max:400|string',
-            "harga_paket" => 'required|numeric|min:5',
-            "catatan_paket" => 'required|string:min:20|max:100',
+            "deskripsi_paket" => 'required|string',
+            "harga_paket" => 'required|numeric',
+            "catatan_paket" => 'required|string',
             "aktif_paket" => 'required',
             "gambar_paket" => 'required|image|mimes:png,jpeg,webp,jpg'
         ]);
