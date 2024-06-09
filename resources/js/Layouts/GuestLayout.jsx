@@ -74,6 +74,8 @@ export default function Guest({ children, title }) {
             }
         });
     };
+    console.log(auth);
+
     return (
         <div ref={topRef} className="font-oswald bg-black">
             <Head title={title} />
@@ -108,38 +110,45 @@ export default function Guest({ children, title }) {
 
                     {auth.user ? (
                         <>
-                            {auth.user.role == "super-admin" && (
+                            {auth.role !== "super-admin" && (
                                 <MenuLink
                                     link={route("profil_saya")}
                                     active={route().current("profil_saya")}
                                     title={"Profil Saya"}
                                 />
                             )}
-                            <MenuLink
-                                link={route("pesanan_saya")}
-                                active={route().current("pesanan_saya")}
-                                title={"Pesanan Saya"}
-                            />
-                            {cart.kd_pesanan && (
-                                <Link
-                                    href={route(
-                                        "show_pesanan_saya",
-                                        cart.kd_pesanan
+                            {auth.role !== "super-admin" && (
+                                <>
+                                    <MenuLink
+                                        link={route("pesanan_saya")}
+                                        active={route().current("pesanan_saya")}
+                                        title={"Pesanan Saya"}
+                                    />
+                                    {cart.kd_pesanan && (
+                                        <Link
+                                            href={route(
+                                                "show_pesanan_saya",
+                                                cart.kd_pesanan
+                                            )}
+                                            className="text-white hover:text-orange-500 duration-300 ease-in-out transition-all"
+                                        >
+                                            <Badge
+                                                badgeContent={cart.count}
+                                                color="primary"
+                                            >
+                                                <ShoppingCart
+                                                    color="inherit"
+                                                    fontSize="large"
+                                                />
+                                            </Badge>
+                                        </Link>
                                     )}
-                                    className="text-white hover:text-orange-500 duration-300 ease-in-out transition-all"
-                                >
-                                    <Badge
-                                        badgeContent={cart.count}
-                                        color="primary"
-                                    >
-                                        <ShoppingCart
-                                            color="inherit"
-                                            fontSize="large"
-                                        />
-                                    </Badge>
-                                </Link>
+                                </>
                             )}
-                            {auth.user.role == "super-admin" && (
+                            <p className="text-xs text-white">
+                                {auth.user.role}
+                            </p>
+                            {auth.role == "super-admin" && (
                                 <MenuLink
                                     link={route("dashboard")}
                                     active={route().current("dashboard")}
