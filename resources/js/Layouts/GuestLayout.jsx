@@ -108,11 +108,13 @@ export default function Guest({ children, title }) {
 
                     {auth.user ? (
                         <>
-                            <MenuLink
-                                link={route("profil_saya")}
-                                active={route().current("profil_saya")}
-                                title={"Profil Saya"}
-                            />
+                            {auth.user.role == "super-admin" && (
+                                <MenuLink
+                                    link={route("profil_saya")}
+                                    active={route().current("profil_saya")}
+                                    title={"Profil Saya"}
+                                />
+                            )}
                             <MenuLink
                                 link={route("pesanan_saya")}
                                 active={route().current("pesanan_saya")}
@@ -136,6 +138,13 @@ export default function Guest({ children, title }) {
                                         />
                                     </Badge>
                                 </Link>
+                            )}
+                            {auth.user.role == "super-admin" && (
+                                <MenuLink
+                                    link={route("dashboard")}
+                                    active={route().current("dashboard")}
+                                    title={"Dashboard"}
+                                />
                             )}
                             <MenuLink
                                 link={route("logout")}

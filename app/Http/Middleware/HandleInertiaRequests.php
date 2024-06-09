@@ -35,6 +35,11 @@ class HandleInertiaRequests extends Middleware
     {
         $studio = Setting::first();
         $cart = ["kd_pesanan" => null, "count" => 0];
+        $role = null;
+        if ($request->user()) {
+
+            $role = $request->user()->getRoleNames()[0];
+        }
         if ($request->user()) {
 
             $cek = Pesanan::withCount('detailPesanan')->where('user_id', $request->user()->id)
@@ -51,6 +56,7 @@ class HandleInertiaRequests extends Middleware
             ...parent::share($request),
             'auth' => [
                 'user' => $request->user(),
+                'role' => $role,
             ],
             'studio' => $studio,
             'cart' => $cart,
