@@ -11,7 +11,7 @@ class DaftarPaketController extends Controller
     public function index(Request $request)
     {
 
-        $query = Paket::query();
+        $query = Paket::query()->with('kategori');
         if ($request->cari) {
             $query->where('nama_paket', 'like', '%' . $request->cari . '%');
         }

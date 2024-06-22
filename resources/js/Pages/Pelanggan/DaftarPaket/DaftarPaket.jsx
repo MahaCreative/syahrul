@@ -411,9 +411,14 @@ export default function DaftarPaket(props, changeKategori) {
                                     <h3 className=" font-medium text-xl  text-orange-500">
                                         {item.nama_paket}
                                     </h3>
-                                    <h3 className="capitalize font-medium text-base mb-2 text-orange-500">
-                                        {item.lokasi_foto}
-                                    </h3>
+                                    <div className="flex justify-between items-center">
+                                        <h3 className="capitalize font-medium text-base mb-2 text-orange-500">
+                                            {item.lokasi_foto}
+                                        </h3>
+                                        <h3 className="capitalize font-medium text-base mb-2 text-orange-500">
+                                            {item.kategori.nama_kategori}
+                                        </h3>
+                                    </div>
                                     <p
                                         className="line-clamp-2 text-white"
                                         dangerouslySetInnerHTML={{
