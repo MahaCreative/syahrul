@@ -464,10 +464,10 @@ export default function DaftarPaket(props, changeKategori) {
                                     })
                                 }
                                 className={`${
-                                    data.kategori == item.id
+                                    params.kategori_id == item.id
                                         ? "bg-orange-500/50"
                                         : ""
-                                }text-white py-3  px-5 text-xl  capitalize hover:cursor-pointer hover:bg-orange-500/50`}
+                                } text-white py-3  px-5 text-xl  capitalize hover:cursor-pointer hover:bg-orange-500/50`}
                             >
                                 {item.nama_kategori}
                             </div>
