@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('pakets', function (Blueprint $table) {
             $table->id();
+
             $table->string('nama_paket');
             $table->string('lokasi_foto'); //studio, outdor
             $table->longText('deskripsi_paket');

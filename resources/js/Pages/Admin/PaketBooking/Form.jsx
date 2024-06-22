@@ -1,11 +1,12 @@
 import InputText from "@/Components/InputText";
-import { useForm } from "@inertiajs/react";
+import { useForm, usePage } from "@inertiajs/react";
 import { MenuItem, Select } from "@mui/material";
 import React, { useEffect } from "react";
 import CurrencyInput from "react-currency-input-field";
 import Swal from "sweetalert2";
-
+import ReactSelect from "react-select";
 export default function Form({ onClose, model, setModel }) {
+    const { kategori } = usePage().props;
     const { data, setData, post, reset, errors } = useForm({
         nama_paket: "",
         lokasi_foto: "",
@@ -14,6 +15,7 @@ export default function Form({ onClose, model, setModel }) {
         gambar_paket: "",
         catatan_paket: "",
         aktif_paket: "",
+        kategori_id: "",
     });
 
     const submitHandler = (e) => {
@@ -116,9 +118,13 @@ export default function Form({ onClose, model, setModel }) {
             gambar_paket: model ? model.gambar_paket : "",
             catatan_paket: model ? model.catatan_paket : "",
             aktif_paket: model ? model.aktif_paket : "",
+
+            kategori_id: model ? model.kategori.nama_kategori : "",
         });
     }, [model]);
-
+    console.log("====================================");
+    console.log(data.kategori_id);
+    console.log("====================================");
     return (
         <div
             className="px-8 md:px-16 lg:px-24 w-full h-full flex overflow-y-auto justify-center items-center
@@ -205,6 +211,19 @@ export default function Form({ onClose, model, setModel }) {
                             }
                         />
                     </div>
+                    <ReactSelect
+                        defaultValue={{
+                            value: model?.kategori.nama_kategori,
+                            label: model?.kategori.nama_kategori,
+                        }}
+                        onChange={(e) =>
+                            setData({ ...data, kategori_id: e.value })
+                        }
+                        options={kategori.map((item) => ({
+                            value: item.nama_kategori,
+                            label: item.nama_kategori,
+                        }))}
+                    />
                     <div>
                         <p>Lokasi Foto</p>
                         <Select

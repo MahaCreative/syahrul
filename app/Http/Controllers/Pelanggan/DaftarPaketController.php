@@ -21,6 +21,9 @@ class DaftarPaketController extends Controller
         if ($request->lokasi) {
             $query->where('lokasi_foto', $request->lokasi);
         }
+        if ($request->kategori_id) {
+            $query->where('kategori_id', $request->kategori_id);
+        }
         $paket = $query->latest()->get();
         return inertia('Pelanggan/DaftarPaket/DaftarPaket', compact('paket'));
     }

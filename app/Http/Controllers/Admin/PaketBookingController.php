@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\DetailPesanan;
+use App\Models\Kategori;
 use App\Models\Paket;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -13,7 +14,7 @@ class PaketBookingController extends Controller
 {
     public function index(Request $request)
     {
-        $query = Paket::query()->withCount(['detail_pesanan as jumlah_pesanan' => function ($q) {
+        $query = Paket::query()->with('kategori')->withCount(['detail_pesanan as jumlah_pesanan' => function ($q) {
             $q->where('status_pesanan_paket', 'diterima');
         }]);
         $paket = $query->latest()->get();
@@ -34,6 +35,7 @@ class PaketBookingController extends Controller
 
     public function  create(Request $request)
     {
+
         $attr = $request->validate([
             "nama_paket" => 'required|string|min:6|max:70',
             "lokasi_foto" => 'required',
@@ -41,8 +43,11 @@ class PaketBookingController extends Controller
             "harga_paket" => 'required|numeric',
             "catatan_paket" => 'required|string',
             "aktif_paket" => 'required',
-            "gambar_paket" => 'required|image|mimes:png,jpeg,webp,jpg'
+            "gambar_paket" => 'required|image|mimes:png,jpeg,webp,jpg',
+            'kategori_id' => 'required',
         ]);
+        $kategori = Kategori::where('nama_kategori', $request->kategori_id)->first();
+        $attr['kategori_id'] = $kategori->id;
         $attr['gambar_paket'] = $request->file('gambar_paket')->store('gambar_paket');
         $paket = Paket::create($attr);
         return redirect()->back();
@@ -56,8 +61,11 @@ class PaketBookingController extends Controller
             "harga_paket" => 'required|numeric|min:5',
             "catatan_paket" => 'required|string:min:20|max:100',
             "aktif_paket" => 'required',
-            "gambar_paket" => 'required'
+            "gambar_paket" => 'required',
+            'kategori_id' => 'required',
         ]);
+        $kategori = Kategori::where('nama_kategori', $request->kategori_id)->first();
+        $attr['kategori_id'] = $kategori->id;
         $paket = Paket::findOrFail($request->id);
         $attr['gambar_paket'] = $paket->gambar_paket;
         if ($request->hasFile('gambar_paket')) {

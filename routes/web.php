@@ -13,6 +13,7 @@ use App\Http\Controllers\Admin\ProfileStudio;
 use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\TeamController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\Pelanggan\DaftarPaketController;
 use App\Http\Controllers\Pelanggan\GaleryController as PelangganGaleryController;
 use App\Http\Controllers\Pelanggan\HomeController;
@@ -85,6 +86,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('create-jadwal', [JadwalController::class, 'create'])->name('admin.create-kelola-jadwal');
     Route::post('store-jadwal', [JadwalController::class, 'store'])->name('admin.store-jadwal');
     Route::delete('delete-jadwal', [JadwalController::class, 'delete'])->name('delete.kelola-jadwal');
+
+    Route::get('kelola-kategori', [KategoriController::class, 'index'])->name('admin.kelola-kategori');
+    Route::post('store-kategori', [KategoriController::class, 'store'])->name('admin.store-kelola-kategori');
+    Route::delete('delete-kategori', [KategoriController::class, 'delete'])->name('delete.kelola-kategori');
 
     Route::get('kelola-paket-booking', [PaketBookingController::class, 'index'])->name('admin.kelola_paket_booking');
     Route::get('show-kelola-paket-booking/{id}', [PaketBookingController::class, 'show'])->name('admin.show_paket');

@@ -18,7 +18,8 @@ import { Tooltip, debounce } from "@mui/material";
 import DaftarPaket from "./DaftarPaket/DaftarPaket";
 export default function Home(props) {
     const paket = props.paket;
-    const [load, setLoad] = useState({ load: 8 });
+    const kategori = props.kategori;
+    const [load, setLoad] = useState({ load: 8, kategori_id: "" });
     const ulasan = props.ulasan;
     const team = props.team;
     let sliderRef = useRef(null);
@@ -73,7 +74,7 @@ export default function Home(props) {
     useEffect(() => reloadLoad(load), [load]);
     return (
         <div className="w-full overflow-x-hidden">
-            <DaftarPaket paket={paket} />
+            <DaftarPaket paket={paket} kategori={kategori} />
 
             {team && (
                 <div className="">

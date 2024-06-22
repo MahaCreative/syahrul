@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\Kategori;
 use App\Models\Pesanan;
 use App\Models\Setting;
 use App\Models\Slider;
@@ -36,6 +37,7 @@ class HandleInertiaRequests extends Middleware
         $studio = Setting::first();
         $cart = ["kd_pesanan" => null, "count" => 0];
         $role = null;
+        $kategori = Kategori::latest()->get();
         if ($request->user()) {
 
             $role = $request->user()->getRoleNames()[0];
@@ -65,6 +67,7 @@ class HandleInertiaRequests extends Middleware
                 ...(new Ziggy)->toArray(),
                 'location' => $request->url(),
             ],
+            'kategori' => $kategori,
         ];
     }
 }

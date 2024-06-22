@@ -139,6 +139,12 @@ export default function Authenticated({ children, title }) {
                             }
                         />
                         <MenuAdmin
+                            active={route().current("admin.kelola-kategori")}
+                            title={"Kelola Kategori"}
+                            href={route("admin.kelola-kategori")}
+                            icon={<List color="inherit" fontSize="inherit" />}
+                        />
+                        <MenuAdmin
                             active={route().current(
                                 "admin.kelola_paket_booking"
                             )}

@@ -21,11 +21,17 @@ import "react-calendar/dist/Calendar.css";
 import Calendar from "react-calendar";
 import moment from "moment";
 
-export default function DaftarPaket(props) {
+export default function DaftarPaket(props, changeKategori) {
     const itemPaketRef = useRef(null);
     const paket = props.paket;
+    const kategori = props.kategori;
     const { studio } = usePage().props;
-    const [params, setParams] = useState({ status: "", cari: "", lokasi: "" });
+    const [params, setParams] = useState({
+        status: "",
+        cari: "",
+        lokasi: "",
+        kategori_id: "",
+    });
     const [modalView, setModalView] = useState(false);
     const [modalForm, setModalForm] = useState(false);
     const [model, setModel] = useState([null]);
@@ -378,70 +384,98 @@ export default function DaftarPaket(props) {
                     {studio.nama_studio + " " + studio.tagline}
                 </p>
             </div>
-            <div
-                ref={itemPaketRef}
-                className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4  transition-all duration-300 ease-in-out"
-            >
-                {paket.map((item, key) => (
-                    <ScrollAnimation
-                        key={key}
-                        className="relative py-2 ease-out transition-all mt-16 duration-300 hover:even:bg-orange-500  odd:hover:bg-orange-700/50      px-3 h-[500px]  even:bg-white rounded-xl flex items-center justify-center flex-col"
-                        animateIn={`${
-                            key % 2 == 1 ? "fadeInDown" : "fadeInUp"
-                        } `}
-                        animateOut={`${
-                            key % 2 == 1 ? "fadeInDown" : "fadeInUp"
-                        } `}
-                        delay={key * 100}
-                    >
-                        <img
-                            src={"/storage/" + item.gambar_paket}
-                            alt=""
-                            className="h-full object-cover"
-                        />
-                        <div className="absolute top-0 left-0 w-full h-full bg-black/50 flex items-end px-8 py-4">
-                            <div>
-                                <h3 className=" font-medium text-xl  text-orange-500">
-                                    {item.nama_paket}
-                                </h3>
-                                <h3 className="capitalize font-medium text-base mb-2 text-orange-500">
-                                    {item.lokasi_foto}
-                                </h3>
-                                <p
-                                    className="line-clamp-2 text-white"
-                                    dangerouslySetInnerHTML={{
-                                        __html: item.deskripsi_paket,
-                                    }}
-                                />
-                                <p>
-                                    <CurrencyInput
-                                        prefix="Rp. "
-                                        className="bg-inherit pt-6 p-0 border-none text-orange-500 text-3xl font-bold"
-                                        value={item.harga_paket}
+            <div className="flex flex-col-reverse md:flex-row md:mt-16">
+                <div
+                    ref={itemPaketRef}
+                    className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4  transition-all duration-300 ease-in-out"
+                >
+                    {paket.map((item, key) => (
+                        <ScrollAnimation
+                            key={key}
+                            className="relative py-2 ease-out transition-all mt-16 duration-300 hover:even:bg-orange-500  odd:hover:bg-orange-700/50      px-3 h-[500px]  even:bg-white rounded-xl flex items-center justify-center flex-col"
+                            animateIn={`${
+                                key % 2 == 1 ? "fadeInDown" : "fadeInUp"
+                            } `}
+                            animateOut={`${
+                                key % 2 == 1 ? "fadeInDown" : "fadeInUp"
+                            } `}
+                            delay={key * 100}
+                        >
+                            <img
+                                src={"/storage/" + item.gambar_paket}
+                                alt=""
+                                className="h-full object-cover"
+                            />
+                            <div className="absolute top-0 left-0 w-full h-full bg-black/50 flex items-end px-8 py-4">
+                                <div>
+                                    <h3 className=" font-medium text-xl  text-orange-500">
+                                        {item.nama_paket}
+                                    </h3>
+                                    <h3 className="capitalize font-medium text-base mb-2 text-orange-500">
+                                        {item.lokasi_foto}
+                                    </h3>
+                                    <p
+                                        className="line-clamp-2 text-white"
+                                        dangerouslySetInnerHTML={{
+                                            __html: item.deskripsi_paket,
+                                        }}
                                     />
-                                </p>
-                                <div className="pb-2 flex gap-3">
-                                    <button
-                                        onClick={() => viewHandler(item)}
-                                        className="py-2  hover:cursor-pointer hover:scale-125 duration-300 ease-in-out transition-all px-2 text-white bg-orange-500/50 backdrop-blur-sm rounded-md"
-                                    >
-                                        <Tooltip title={"Detail Paket"}>
-                                            <RemoveRedEye fontSize="inherit" />
-                                        </Tooltip>
-                                    </button>
-                                    <button
-                                        onClick={() => booking(item)}
-                                        className="py-2  hover:cursor-pointer hover:scale-125 duration-300 ease-in-out transition-all px-2 text-white bg-orange-500/50 backdrop-blur-sm rounded-md"
-                                    >
-                                        <Tooltip title={"Booking sekarang"}>
-                                            <ShoppingBag fontSize="inherit" />
-                                        </Tooltip>
-                                    </button>
+                                    <p>
+                                        <CurrencyInput
+                                            prefix="Rp. "
+                                            className="bg-inherit pt-6 p-0 border-none text-orange-500 text-3xl font-bold"
+                                            value={item.harga_paket}
+                                        />
+                                    </p>
+                                    <div className="pb-2 flex gap-3">
+                                        <button
+                                            onClick={() => viewHandler(item)}
+                                            className="py-2  hover:cursor-pointer hover:scale-125 duration-300 ease-in-out transition-all px-2 text-white bg-orange-500/50 backdrop-blur-sm rounded-md"
+                                        >
+                                            <Tooltip title={"Detail Paket"}>
+                                                <RemoveRedEye fontSize="inherit" />
+                                            </Tooltip>
+                                        </button>
+                                        <button
+                                            onClick={() => booking(item)}
+                                            className="py-2  hover:cursor-pointer hover:scale-125 duration-300 ease-in-out transition-all px-2 text-white bg-orange-500/50 backdrop-blur-sm rounded-md"
+                                        >
+                                            <Tooltip title={"Booking sekarang"}>
+                                                <ShoppingBag fontSize="inherit" />
+                                            </Tooltip>
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </ScrollAnimation>
-                ))}
+                        </ScrollAnimation>
+                    ))}
+                </div>
+                {kategori.length > 0 ? (
+                    <div className="w-1/6">
+                        <h3 className="text-orange-500 text-center text-xl font-bold tracking-tighter">
+                            Daftar Kategori Paket
+                        </h3>
+                        {kategori.map((item) => (
+                            <div
+                                onClick={() =>
+                                    setParams({
+                                        ...params,
+                                        kategori_id: item.id,
+                                    })
+                                }
+                                className={`${
+                                    data.kategori == item.id
+                                        ? "bg-orange-500/50"
+                                        : ""
+                                }text-white py-3  px-5 text-xl  capitalize hover:cursor-pointer hover:bg-orange-500/50`}
+                            >
+                                {item.nama_kategori}
+                            </div>
+                        ))}
+                    </div>
+                ) : (
+                    ""
+                )}
             </div>
         </div>
     );

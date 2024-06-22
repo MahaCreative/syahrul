@@ -6,6 +6,7 @@ namespace Database\Seeders;
 
 use App\Models\Galery;
 use App\Models\Jadwal;
+use App\Models\Kategori;
 use App\Models\Paket;
 use App\Models\ProfileAdmin;
 use App\Models\Slider;
@@ -48,7 +49,7 @@ class DatabaseSeeder extends Seeder
         User::factory(100)->hasProfile()->create();
 
         Slider::factory(5)->create();
-        Paket::factory(10)->create();
+        Kategori::factory(5)->hasPaket(5)->create();
         UlasanStudio::factory(1)->create();
         Team::factory(4)->create();
         Galery::factory(100)->create();

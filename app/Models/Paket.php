@@ -14,4 +14,9 @@ class Paket extends Model
     {
         return $this->hasMany(DetailPesanan::class);
     }
+
+    public function kategori()
+    {
+        return $this->belongsTo(Kategori::class);
+    }
 }
