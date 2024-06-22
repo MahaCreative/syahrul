@@ -14,7 +14,7 @@ class HomeController extends Controller
     public function index(Request $request)
     {
         $load = 8;
-        $query = Paket::query();
+        $query = Paket::query()->with('kategori');
         if ($request->load) {
             $load = $request->load;
         }
