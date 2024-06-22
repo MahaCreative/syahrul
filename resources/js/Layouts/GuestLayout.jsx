@@ -74,7 +74,6 @@ export default function Guest({ children, title }) {
             }
         });
     };
-    console.log(auth);
 
     return (
         <div ref={topRef} className="font-oswald bg-black">
