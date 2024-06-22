@@ -170,7 +170,7 @@ export default function Register() {
                         required
                         title={"Konfirmasi Password"}
                         name={"password_confirmation"}
-                        type="password"
+                        type="passwoard"
                         errors={errors.password_confirmation}
                         onChange={(e) =>
                             setData({
