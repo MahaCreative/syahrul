@@ -451,7 +451,7 @@ export default function DaftarPaket(props, changeKategori) {
                     ))}
                 </div>
                 {kategori.length > 0 ? (
-                    <div className="w-1/6">
+                    <div className="w-full md:w-1/6">
                         <h3 className="text-orange-500 text-center text-xl font-bold tracking-tighter">
                             Daftar Kategori Paket
                         </h3>
