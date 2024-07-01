@@ -22,9 +22,9 @@ class ProfileSaya extends Controller
         $request->validate([
             "first_name" => "required|string|min:4",
             "last_name" => "nullable|min:3",
-            "alamat" => "required|string|min:20",
+            "alamat" => "required|string|min:6",
             "no_telp" => "required|numeric|digits:12",
-            "foto" => "nullable|image|mimes:jpg,jpeg,png,webp",
+            "foto" => "nullable",
             "email" => "required|email|string",
             "password" => "nullable|confirmed|string|min:6",
         ]);
@@ -37,6 +37,9 @@ class ProfileSaya extends Controller
         }
         $foto = $profile->foto;
         if ($request->hasFile('foto')) {
+            $request->validate([
+                "foto" => "image|mimes:jpg,jpeg,png,webp"
+            ]);
             $foto = $request->file('foto')->storeAs('Foto/Pelanggan', $request->file('foto')->getClientOriginalName());
         }
 

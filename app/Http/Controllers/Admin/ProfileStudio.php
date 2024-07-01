@@ -18,16 +18,16 @@ class ProfileStudio extends Controller
     {
         $attr = $request->validate([
             "nama_studio" => 'required|string|min:10|max:50',
-            "tagline" => 'required|min:20|max:200',
+            "tagline" => 'required|min:6|max:200',
             "foto_studio" => 'required',
-            "alamat_studio" => 'required|min:20|max:200',
+            "alamat_studio" => 'required|min:6|max:200',
             "telp_studio" => 'required|numeric|digits:12',
             "email_studio" => 'required|email',
             "facebook_studio" => 'required',
             "instagram_studio" => 'required',
             "link_facebook_studio" => 'required',
             "link_instagram_studio" => 'required',
-            "deskripsi_studio" => 'required|min:150|max:5000',
+            "deskripsi_studio" => 'required|min:6|max:5000',
         ]);
         $profile = Setting::first();
         $attr['foto_studio'] = $profile->foto_studio;

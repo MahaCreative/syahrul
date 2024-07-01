@@ -19,13 +19,16 @@ class AuthController extends Controller
         $request->validate([
             "first_name" => "required|string|min:4",
             "last_name" => "nullable|min:3",
-            "alamat" => "required|string|min:20",
-            "no_telp" => "required|numeric|digits:12",
-            "foto" => "nullable|image|mimes:jpg,jpeg,png,webp",
-            "email" => "required|email|string",
+            "alamat" => "required|string|min:6",
+            "no_telp" => "required|numeric|digits:12|unique:users,no_telp",
+            "foto" => "nullable",
+            "email" => "required|email|string|unique:users,email",
             "password" => "required|confirmed|string|min:6",
         ]);
-        $foto = $request->file('foto') ? $request->file('foto')->store('Foto/Pelanggan') : null;
+        if ($request->hasFile('foto')) {
+            $request->validate(['foto' => 'image|mimes:jpg,jpeg,png,webp']);
+        }
+        $foto = $request->file('foto') ? $request->file('foto')->store('Foto/Pelanggan') : 'Image/default_foto.jpg';
         $user = User::create([
             "name" => $request->first_name . " " . $request->last_name,
             "email" => $request->email,
@@ -68,7 +71,6 @@ class AuthController extends Controller
 
     public function logout(Request $request)
     {
-
         Auth::logout();
     }
 }

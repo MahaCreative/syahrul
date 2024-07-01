@@ -19,7 +19,7 @@ class SliderController extends Controller
     {
         $attr = $request->validate([
             "title" => 'required|string|min:6',
-            "subtitle" => 'required|string|min:30|max:100',
+            "subtitle" => 'required|string|min:6|max:100',
             "foto" => 'required|image|mimes:png,jpeg,jpg,webp',
             "position" => 'required',
             "status" => 'required',
@@ -32,7 +32,7 @@ class SliderController extends Controller
     {
         $attr = $request->validate([
             "title" => 'required|string|min:6',
-            "subtitle" => 'required|string|min:30|max:100',
+            "subtitle" => 'required|string|min:6|max:100',
             "foto" => 'required',
             "position" => 'required',
             "status" => 'required',

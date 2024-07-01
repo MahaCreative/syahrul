@@ -20,7 +20,7 @@ class GaleryController extends Controller
             "nama_pelanggan" => 'required|string|min:6',
             "foto" => 'required|image|mimes:png,jpeg,jpg',
             "tanggal_foto" => 'required',
-            "deskripsi" => 'required|min:50|max:500',
+            "deskripsi" => 'required|min:6|max:500',
             "taken_by" => 'required|string|min:6',
         ]);
         $attr['foto'] = $request->file('foto')->store('galery');
@@ -33,7 +33,7 @@ class GaleryController extends Controller
             "nama_pelanggan" => 'required|string|min:6',
             "foto" => 'required',
             "tanggal_foto" => 'required',
-            "deskripsi" => 'required|min:50|max:500',
+            "deskripsi" => 'required|min:6|max:500',
             "taken_by" => 'required|string|min:6',
         ]);
         $attr['foto'] = $request->file('foto')->store('galery');
