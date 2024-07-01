@@ -23,7 +23,7 @@ class KelolaAdminController extends Controller
         $request->validate([
             "first_name" => "required|string|min:4",
             "last_name" => "nullable|min:3",
-            "alamat" => "required|string|min:20",
+            "alamat" => "required|string|min:6",
             "no_telp" => "required|numeric|digits:12|unique:profile_admins,no_telp",
             "foto" => "nullable|image|mimes:jpg,jpeg,png,webp",
             "email" => "required|email|string|unique:users,email",
@@ -54,7 +54,7 @@ class KelolaAdminController extends Controller
         $request->validate([
             "first_name" => "required|string|min:4",
             "last_name" => "nullable|min:3",
-            "alamat" => "required|string|min:20",
+            "alamat" => "required|string|min:6",
             "no_telp" => "required|numeric|digits:12|unique:profile_admins,no_telp," . $profile->id,
             "foto" => "nullable",
             "email" => "required|email|string|unique:users,email," . $profile->user_id,
