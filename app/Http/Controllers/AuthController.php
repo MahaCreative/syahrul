@@ -20,7 +20,7 @@ class AuthController extends Controller
             "first_name" => "required|string|min:4",
             "last_name" => "nullable|min:3",
             "alamat" => "required|string|min:6",
-            "no_telp" => "required|numeric|digits:12|unique:users,no_telp",
+            "no_telp" => "required|numeric|digits:12",
             "foto" => "nullable",
             "email" => "required|email|string|unique:users,email",
             "password" => "required|confirmed|string|min:6",
