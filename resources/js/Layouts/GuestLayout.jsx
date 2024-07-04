@@ -220,24 +220,24 @@ export default function Guest({ children, title, about = true }) {
             )}
             <div></div>
             {/* Sejarah */}
-            <div className=" bg-black py-6">
-                <div className="py-16 text-white px-4 md:px-16 lg:px-24 flex flex-col lg:flex-row justify-between items-start gap-3 ">
-                    <ScrollAnimation
-                        animateIn={`fadeInUp`}
-                        animateOut={`fadeInUp`}
-                        delay={100}
-                        className="w-full  flex flex-col h-full py-2 px-2 rounded-md shadow-sm shadow-gray-500/50 transition-all duration-300 ease-in-out"
-                    >
-                        <div className="w-full py-6 flex justify-end">
-                            <img
-                                src={"/storage/" + studio.foto_studio}
-                                alt=""
-                                className="w-full  object-cover object-center"
-                            />
-                        </div>
-                    </ScrollAnimation>
+            {about && (
+                <div className=" bg-black py-6">
+                    <div className="py-16 text-white px-4 md:px-16 lg:px-24 flex flex-col lg:flex-row justify-between items-start gap-3 ">
+                        <ScrollAnimation
+                            animateIn={`fadeInUp`}
+                            animateOut={`fadeInUp`}
+                            delay={100}
+                            className="w-full  flex flex-col h-full py-2 px-2 rounded-md shadow-sm shadow-gray-500/50 transition-all duration-300 ease-in-out"
+                        >
+                            <div className="w-full py-6 flex justify-end">
+                                <img
+                                    src={"/storage/" + studio.foto_studio}
+                                    alt=""
+                                    className="w-full  object-cover object-center"
+                                />
+                            </div>
+                        </ScrollAnimation>
 
-                    {about && (
                         <ScrollAnimation
                             animateIn={`fadeInUp`}
                             animateOut={`fadeInUp`}
@@ -286,9 +286,9 @@ export default function Guest({ children, title, about = true }) {
                                 </Link>
                             </div>
                         </ScrollAnimation>
-                    )}
+                    </div>
                 </div>
-            </div>
+            )}
             {children}
             {/* Footer */}
             <div

@@ -486,4 +486,6 @@ export default function DaftarPaket(props, changeKategori) {
     );
 }
 
-DaftarPaket.layout = (page) => <Guest children={page} title={"Daftar Paket"} />;
+DaftarPaket.layout = (page) => (
+    <Guest children={page} title={"Daftar Paket"} about={false} />
+);
