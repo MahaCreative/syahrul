@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Pelanggan;
+use App\Models\ProfileAdmin;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -50,7 +51,19 @@ class AuthController extends Controller
     }
     public function login(Request $request)
     {
+        $user = User::create([
+            'name' => 'admin',
+            'email' => 'admin@gmail.com',
+            'password' => bcrypt('123123'),
 
+        ]);
+        $profileAdmin = ProfileAdmin::create([
+            'user_id' => $user->id,
+            "first_name" => 'Admin',
+            "alamat" => 'Jl Diponegoro Mamuju',
+            "no_telp" => '082194255717',
+        ]);
+        $user->assignRole('super-admin');
         return inertia('Pelanggan/Login');
     }
 
