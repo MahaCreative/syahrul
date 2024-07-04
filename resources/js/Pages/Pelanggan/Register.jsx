@@ -195,4 +195,6 @@ export default function Register() {
         </div>
     );
 }
-Register.layout = (page) => <Guest children={page} title={"Register"} />;
+Register.layout = (page) => (
+    <Guest children={page} title={"Register"} about={false} />
+);

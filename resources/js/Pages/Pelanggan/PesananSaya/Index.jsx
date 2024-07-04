@@ -200,4 +200,6 @@ export default function Index(props) {
     );
 }
 
-Index.layout = (page) => <Guest children={page} title={"Pesanan Saya"} />;
+Index.layout = (page) => (
+    <Guest children={page} title={"Pesanan Saya"} about={false} />
+);

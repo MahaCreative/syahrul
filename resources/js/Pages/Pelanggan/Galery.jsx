@@ -51,4 +51,6 @@ export default function Galery(props) {
         </div>
     );
 }
-Galery.layout = (page) => <Guest children={page} title={"Galery"} />;
+Galery.layout = (page) => (
+    <Guest children={page} title={"Galery"} about={false} />
+);

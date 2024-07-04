@@ -195,4 +195,6 @@ export default function Index(props) {
     );
 }
 
-Index.layout = (page) => <Guest children={page} title={"Profile Saya"} />;
+Index.layout = (page) => (
+    <Guest children={page} title={"Profile Saya"} about={false} />
+);

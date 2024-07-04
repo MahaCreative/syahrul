@@ -166,5 +166,5 @@ export default function InvoicePesanan(props) {
 }
 
 InvoicePesanan.layout = (page) => (
-    <Guest children={page} title={"Invoice Pesanan"} />
+    <Guest children={page} title={"Invoice Pesanan"} about={false} />
 );

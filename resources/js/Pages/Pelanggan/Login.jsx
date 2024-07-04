@@ -120,4 +120,6 @@ export default function Login() {
         </div>
     );
 }
-Login.layout = (page) => <Guest children={page} title={"Login"} />;
+Login.layout = (page) => (
+    <Guest children={page} title={"Login"} about={false} />
+);

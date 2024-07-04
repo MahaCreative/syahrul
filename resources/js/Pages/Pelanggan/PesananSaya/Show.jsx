@@ -674,4 +674,6 @@ export default function Show(props) {
         </div>
     );
 }
-Show.layout = (page) => <Guest children={page} title={"Detail Pesanan Saya"} />;
+Show.layout = (page) => (
+    <Guest children={page} title={"Detail Pesanan Saya"} about={false} />
+);

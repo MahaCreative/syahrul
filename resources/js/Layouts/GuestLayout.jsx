@@ -9,7 +9,7 @@ import ScrollAnimation from "react-animate-on-scroll";
 import { Slide, Zoom } from "react-slideshow-image";
 import "react-slideshow-image/dist/styles.css";
 import Swal from "sweetalert2";
-export default function Guest({ children, title }) {
+export default function Guest({ children, title, about = true }) {
     const { auth } = usePage().props;
     const { cart } = usePage().props;
     const { studio } = usePage().props;
@@ -237,54 +237,56 @@ export default function Guest({ children, title }) {
                         </div>
                     </ScrollAnimation>
 
-                    <ScrollAnimation
-                        animateIn={`fadeInUp`}
-                        animateOut={`fadeInUp`}
-                        delay={200}
-                        className="w-full "
-                    >
-                        <p className="text-orange-500 text-4xl my-3 border-b-4 border-orange-500 inline-block">
-                            About Me
-                        </p>
-                        <h3 className="capitalize text-4xl md:text-5xl lg:text-7xl font-medium leading-none mb-3 tracking-tighter text-orange-500 ">
-                            {studio.nama_studio + " " + studio.tagline}
-                        </h3>
-                        <p
-                            className="text-xl font-light "
-                            dangerouslySetInnerHTML={{
-                                __html: studio.deskripsi_studio,
-                            }}
-                        />
-                        <div className="my-3 text-lg font-medium text-orange-500 flex gap-3 items-center">
-                            <Link
-                                as="a"
-                                href={studio.link_facebook_studio}
-                                className="flex gap-3"
-                            >
-                                <span>
-                                    <Facebook
-                                        color="inherit"
-                                        fontSize="large"
-                                    />{" "}
-                                </span>
-                                <span>{studio.facebook_studio}</span>
-                            </Link>
-                            <Link
-                                as="a"
-                                target="_blank"
-                                href={studio.link_instagram_studio}
-                                className="flex gap-3"
-                            >
-                                <span>
-                                    <Instagram
-                                        color="inherit"
-                                        fontSize="large"
-                                    />{" "}
-                                </span>
-                                <span>{studio.instagram_studio}</span>
-                            </Link>
-                        </div>
-                    </ScrollAnimation>
+                    {about && (
+                        <ScrollAnimation
+                            animateIn={`fadeInUp`}
+                            animateOut={`fadeInUp`}
+                            delay={200}
+                            className="w-full "
+                        >
+                            <p className="text-orange-500 text-4xl my-3 border-b-4 border-orange-500 inline-block">
+                                About Me
+                            </p>
+                            <h3 className="capitalize text-4xl md:text-5xl lg:text-7xl font-medium leading-none mb-3 tracking-tighter text-orange-500 ">
+                                {studio.nama_studio + " " + studio.tagline}
+                            </h3>
+                            <p
+                                className="text-xl font-light "
+                                dangerouslySetInnerHTML={{
+                                    __html: studio.deskripsi_studio,
+                                }}
+                            />
+                            <div className="my-3 text-lg font-medium text-orange-500 flex gap-3 items-center">
+                                <Link
+                                    as="a"
+                                    href={studio.link_facebook_studio}
+                                    className="flex gap-3"
+                                >
+                                    <span>
+                                        <Facebook
+                                            color="inherit"
+                                            fontSize="large"
+                                        />{" "}
+                                    </span>
+                                    <span>{studio.facebook_studio}</span>
+                                </Link>
+                                <Link
+                                    as="a"
+                                    target="_blank"
+                                    href={studio.link_instagram_studio}
+                                    className="flex gap-3"
+                                >
+                                    <span>
+                                        <Instagram
+                                            color="inherit"
+                                            fontSize="large"
+                                        />{" "}
+                                    </span>
+                                    <span>{studio.instagram_studio}</span>
+                                </Link>
+                            </div>
+                        </ScrollAnimation>
+                    )}
                 </div>
             </div>
             {children}
