@@ -210,5 +210,5 @@ export default function Home(props) {
 }
 
 Home.layout = (page) => (
-    <Guest children={page} title={"Beranda"} about={false} />
+    <Guest children={page} title={"Beranda"} about={true} />
 );
