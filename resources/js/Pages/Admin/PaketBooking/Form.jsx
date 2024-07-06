@@ -245,7 +245,7 @@ export default function Form({ onClose, model, setModel }) {
                             </MenuItem>
 
                             <MenuItem value={"studio"}>Studio</MenuItem>
-                            <MenuItem value={"indor"}>Indor</MenuItem>
+                            <MenuItem value={"outdor"}>Outdor</MenuItem>
                         </Select>
                         {errors && (
                             <p className="text-xs text-red-500 italic">
