@@ -37,10 +37,22 @@ export default function Galery(props) {
                                 {/* <p className="text-white text-left text-xl font-bold tracking-tighter">
                                     Nama Pelanggan : {item.nama_pelanggan}
                                 </p> */}
-                                <p className="text-white text-sm font-light tracking-tighter">
+                                <p
+                                    className={`${
+                                        key % 2 === 1
+                                            ? "text-black"
+                                            : "text-white"
+                                    } text-sm font-light tracking-tighter`}
+                                >
                                     {item.tanggal_foto}
                                 </p>
-                                <p className="text-white text-sm font-light tracking-tighter">
+                                <p
+                                    className={`${
+                                        key % 2 === 1
+                                            ? "text-black"
+                                            : "text-white"
+                                    } text-sm font-light tracking-tighter`}
+                                >
                                     Taken By: {item.taken_by}
                                 </p>
                             </ScrollAnimation>
