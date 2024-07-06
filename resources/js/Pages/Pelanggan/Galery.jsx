@@ -29,7 +29,11 @@ export default function Galery(props) {
                                 } `}
                                 delay={key * 100}
                             >
-                                <img src={"/storage/" + item.foto} alt="" />
+                                <img
+                                    src={"/storage/" + item.foto}
+                                    alt=""
+                                    className="h-full w-full object-cover"
+                                />
                                 {/* <p className="text-white text-left text-xl font-bold tracking-tighter">
                                     Nama Pelanggan : {item.nama_pelanggan}
                                 </p> */}
