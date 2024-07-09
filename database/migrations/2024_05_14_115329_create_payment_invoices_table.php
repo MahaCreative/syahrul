@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('payment_type')->nullable();
             $table->string('succeeded_at')->nullable();
             $table->string('snap_token')->unique()->nullable();
+            $table->string('bukti_pembayaran')->nullable();
             $table->timestamps();
         });
     }

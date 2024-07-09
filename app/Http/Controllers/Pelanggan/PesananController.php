@@ -14,7 +14,7 @@ class PesananController extends Controller
 {
     public function index(Request $request)
     {
-        $query = Pesanan::query()->withCount('detailPesanan')->where('user_id', $request->user()->id);
+        $query = Pesanan::query()->withCount('detailPesanan')->with('invoice')->where('user_id', $request->user()->id);
 
         if ($request->cari) {
             $query->where('kd_pesanan', $request->cari);

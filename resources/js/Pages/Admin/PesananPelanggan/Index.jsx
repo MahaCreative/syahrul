@@ -83,9 +83,28 @@ export default function Index(props) {
             selector: (row) => row.status_pembayaran,
         },
         {
-            name: "Status Pembayaran",
+            name: "Status Pemesanan",
             wrap: true,
             selector: (row) => row.status_pemesanan,
+        },
+        {
+            name: "Bukti Pembayaran",
+            wrap: true,
+            selector: (row) =>
+                row.invoice?.bukti_pembayaran && (
+                    <>
+                        <a
+                            href={"/storage/" + row.invoice.bukti_pembayaran}
+                            target="_blank"
+                        >
+                            <img
+                                src={"/storage/" + row.invoice.bukti_pembayaran}
+                                alt=""
+                                className="w-20 h-20 object-cover"
+                            />
+                        </a>
+                    </>
+                ),
         },
         {
             name: "Aksi",
@@ -105,6 +124,7 @@ export default function Index(props) {
             ),
         },
     ];
+    console.log(pesanan);
     return (
         <div className="w-full px-4 md:px-8 lg:px-16 transition-all duration-300 ease-in-out py-6 relative z-[999]">
             <div className="rounded-md bg-white py-3 px-4">

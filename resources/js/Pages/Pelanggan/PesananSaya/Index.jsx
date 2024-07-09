@@ -24,6 +24,7 @@ export default function Index(props) {
         dari_tanggal: "",
         sampai_tanggal: "",
     });
+    const inputRef = useRef(null);
     const reload = useCallback(
         debounce((query) => {
             router.get(route("pesanan_saya"), query, {
@@ -85,6 +86,25 @@ export default function Index(props) {
             selector: (row) => row.status_pemesanan,
         },
         {
+            name: "Bukti Pembayaran",
+            wrap: true,
+            selector: (row) =>
+                row.invoice?.bukti_pembayaran && (
+                    <>
+                        <a
+                            href={"/storage/" + row.invoice.bukti_pembayaran}
+                            target="_blank"
+                        >
+                            <img
+                                src={"/storage/" + row.invoice.bukti_pembayaran}
+                                alt=""
+                                className="w-20 h-20 object-cover"
+                            />
+                        </a>
+                    </>
+                ),
+        },
+        {
             name: "Aksi",
 
             selector: (row) => (
@@ -95,6 +115,23 @@ export default function Index(props) {
                     >
                         Lihat
                     </Link>
+                    {row.invoice?.bukti_pembayaran == null && (
+                        <>
+                            <input
+                                ref={inputRef}
+                                name={row.kd_pesanan}
+                                type="file"
+                                className="hidden"
+                                onChange={(e) => uploadBukti(e)}
+                            />
+                            <button
+                                onClick={buktiKlick}
+                                className="bg-green-500 text-white py-2 px-3 rounded-md"
+                            >
+                                Upload Bukti Pembayaran
+                            </button>
+                        </>
+                    )}
                     {row.status_pembayaran == "pesan" && (
                         <button className="bg-red-500 text-white py-2 px-3 rounded-md">
                             Batalkan
@@ -108,6 +145,15 @@ export default function Index(props) {
     useEffect(() => {
         pesananSayaRef.current.scrollIntoView({ behavior: "smooth" });
     }, []);
+    const uploadBukti = (e) => {
+        router.post(route("upload_bukti"), {
+            bukti: e.target.files[0],
+            kd_pesanan: e.target.name,
+        });
+    };
+    const buktiKlick = (e) => {
+        inputRef.current.click();
+    };
     return (
         <div ref={pesananSayaRef} className="py-16 px-4 md:px-8 lg:px-16">
             <div className="my-6">

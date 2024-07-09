@@ -100,4 +100,12 @@ class PaymentPesananController extends Controller
             }
         }
     }
+
+    public function upload_bukti(Request $request)
+    {
+
+        $bukti = $request->file('bukti')->store('bukti_pembayaran');
+        $pesanan = Pesanan::with('invoice')->where('kd_pesanan', $request->kd_pesanan)->first();
+        $pesanan->invoice->update(['bukti_pembayaran' => $bukti]);
+    }
 }

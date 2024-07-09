@@ -121,4 +121,5 @@ Route::middleware(['auth'])->group(function () {
     Route::post('chekout-pesanan', [PaymentPesananController::class, 'checkout'])->name('checkout');
     Route::get('profil-saya', [ProfileSayaController::class, 'index'])->name('profil_saya');
     Route::post('profil-saya', [ProfileSayaController::class, 'update'])->name('update_profil_saya');
+    Route::post('upload-bukti-pembayaran/', [PaymentPesananController::class, 'upload_bukti'])->name('upload_bukti');
 });
