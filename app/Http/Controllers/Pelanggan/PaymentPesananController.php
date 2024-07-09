@@ -103,7 +103,9 @@ class PaymentPesananController extends Controller
 
     public function upload_bukti(Request $request)
     {
-
+        $request->validate([
+            'bukti' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+        ]);
         $bukti = $request->file('bukti')->store('bukti_pembayaran');
         $pesanan = Pesanan::with('invoice')->where('kd_pesanan', $request->kd_pesanan)->first();
         $pesanan->invoice->update(['bukti_pembayaran' => $bukti]);

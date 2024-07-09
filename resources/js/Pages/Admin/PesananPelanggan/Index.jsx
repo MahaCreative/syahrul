@@ -124,7 +124,7 @@ export default function Index(props) {
             ),
         },
     ];
-    console.log(pesanan);
+
     return (
         <div className="w-full px-4 md:px-8 lg:px-16 transition-all duration-300 ease-in-out py-6 relative z-[999]">
             <div className="rounded-md bg-white py-3 px-4">

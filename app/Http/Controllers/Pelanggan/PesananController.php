@@ -35,7 +35,7 @@ class PesananController extends Controller
     {
         $pesanan = Pesanan::withCount(['detailPesanan as pesanan_ditolak' => function ($q) {
             $q->where('status_pesanan_paket', 'di tolak');
-        }])->where('kd_pesanan', $kd_pesanan)->latest()->first();
+        }])->with('invoice')->where('kd_pesanan', $kd_pesanan)->latest()->first();
 
         $detail = DetailPesanan::where('pesanan_id', $pesanan->id)->with('paket')->latest()->get();
 

@@ -17,6 +17,7 @@ export default function Show(props) {
     const pesanan = props.pesanan;
     const [token, setToken] = useState([null]);
     const { studio } = usePage().props;
+    const inputRef = useRef(null);
     const columns = [
         {
             name: "#",
@@ -137,7 +138,46 @@ export default function Show(props) {
                 ),
         },
     ];
+    const uploadBukti = (e) => {
+        Swal.fire({
+            title: "Hapus Paket " + row.paket.nama_paket,
+            text: "Apakah anda ingin menghapus paket ini",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "orange",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Ya Hapus Paket",
+        }).then((result) => {
+            if (result.isConfirmed) {
+                router.post(
+                    route("upload_bukti"),
+                    {
+                        bukti: e.target.files[0],
+                        kd_pesanan: e.target.name,
+                    },
+                    {
+                        preserveScroll: true,
+                        onSuccess: () => {
+                            Swal.fire({
+                                position: "center",
+                                title: "Success",
+                                text: "Bukti Invoice berhasil di kirim",
+                                icon: "success",
+                                timer: 1500,
+                            });
+                        },
+                        onError: (err) => {
+                            console.log();
+                        },
+                    }
+                );
+            }
+        });
+    };
 
+    const buktiKlick = (e) => {
+        inputRef.current.click();
+    };
     const deleteHandler = (row) => {
         Swal.fire({
             title: "Hapus Paket " + row.paket.nama_paket,
@@ -594,16 +634,36 @@ export default function Show(props) {
                                 </div>
                             )}
                             {pesanan.status_pembayaran == "lunas" && (
-                                <Link
-                                    href={route(
-                                        "invoice_pesanan",
-                                        pesanan.kd_pesanan
+                                <>
+                                    <Link
+                                        href={route(
+                                            "invoice_pesanan",
+                                            pesanan.kd_pesanan
+                                        )}
+                                        as="button"
+                                        className="bg-blue-500 text-white py-2 px-4 w-full mt-3"
+                                    >
+                                        Lihat Invoice
+                                    </Link>
+                                    {pesanan.invoice?.bukti_pembayaran ==
+                                        null && (
+                                        <>
+                                            <input
+                                                className="hidden"
+                                                ref={inputRef}
+                                                name={pesanan.kd_pesanan}
+                                                type="file"
+                                                onChange={(e) => uploadBukti(e)}
+                                            />
+                                            <button
+                                                onClick={buktiKlick}
+                                                className="bg-green-500 my-2 w-full text-white py-2 px-3 rounded-md"
+                                            >
+                                                Upload Bukti Pembayaran
+                                            </button>
+                                        </>
                                     )}
-                                    as="button"
-                                    className="bg-blue-500 text-white py-2 px-4 w-full mt-3"
-                                >
-                                    Lihat Invoice
-                                </Link>
+                                </>
                             )}
                         </div>
                     </div>
