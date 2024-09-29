@@ -104,7 +104,8 @@ export default function DetailPesanan(props) {
         {
             name: "Aksi",
             selector: (row) =>
-                pesanan.status_pembayaran != "lunas" && (
+                (pesanan.status_pembayaran != "lunas" ||
+                    pesanan.status_pesanan_paket === "di terima") && (
                     <button
                         onClick={() => konfirmasiPesanan(row)}
                         className="bg-blue-500 font-bold py-2 px-4 text-white"

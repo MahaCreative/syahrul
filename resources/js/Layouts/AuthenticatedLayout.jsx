@@ -166,7 +166,7 @@ export default function Authenticated({ children, title }) {
                         <MenuAdmin
                             active={route().current("admin.kelola-pelanggan")}
                             title={"Kelola Ulasan"}
-                            href={route("admin.kelola-pelanggan")}
+                            href={route("admin.kelola-ulasan")}
                             icon={
                                 <Favorite color="inherit" fontSize="inherit" />
                             }

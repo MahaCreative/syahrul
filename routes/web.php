@@ -21,7 +21,9 @@ use App\Http\Controllers\Pelanggan\PaymentPesananController;
 use App\Http\Controllers\Pelanggan\PesananController;
 use App\Http\Controllers\Pelanggan\ProfileSayaController;
 use App\Http\Controllers\PembayaranPelanggan;
+use App\Http\Controllers\PrintController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UlasanController;
 use App\Http\Controllers\UlasanStudio;
 use App\Models\Galery;
 use Illuminate\Foundation\Application;
@@ -106,6 +108,11 @@ Route::middleware(['auth'])->group(function () {
     Route::get('pesanan-pelanggan/detail_pesanan/{kd_pesanan}', [PesananPelanggan::class, 'detail_pesanan'])->name('admin.detail-pesanan-pelanggan');
 
     Route::get('pembayaran-pelanggan', [PembayaranPelanggan::class, 'index'])->name('admin.pembayaran-pelanggan');
+
+    Route::get('kelola-ulasan', [UlasanController::class, 'index'])->name('admin.kelola-ulasan');
+    Route::post('delete-ulasan', [UlasanController::class, 'delete'])->name('admin.delete-ulasan');
+
+    Route::get('cetak-pesanan-pelanggan', [PrintController::class, 'cetak_pesanan'])->name('admin.cetak-pesanan');
 });
 
 Route::get("logout", [AuthController::class, 'logout'])->name('logout');

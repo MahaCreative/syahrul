@@ -58,14 +58,15 @@ export default function List(props) {
         },
         {
             name: "Aksi",
-            selector: (row) => (
-                <button
-                    onClick={() => konfirmasiPesanan(row)}
-                    className="bg-blue-500 font-bold py-2 px-4 text-white"
-                >
-                    Konfirmasi
-                </button>
-            ),
+            selector: (row) =>
+                row.status_pesanan_paket !== "di terima" && (
+                    <button
+                        onClick={() => konfirmasiPesanan(row)}
+                        className="bg-blue-500 font-bold py-2 px-4 text-white"
+                    >
+                        Konfirmasi
+                    </button>
+                ),
             wrap: true,
         },
     ];

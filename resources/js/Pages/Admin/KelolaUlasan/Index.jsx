@@ -1,4 +1,5 @@
 import InputText from "@/Components/InputText";
+import StyledRating from "@/Components/StyledRating";
 import Authenticated from "@/Layouts/AuthenticatedLayout";
 import { Link, router } from "@inertiajs/react";
 import { Cancel, Print, Sort } from "@mui/icons-material";
@@ -10,20 +11,20 @@ import CurrencyInput from "react-currency-input-field";
 import DataTable from "react-data-table-component";
 
 export default function Index(props) {
-    const pesanan = props.pesanan;
+    const ulasan = props.ulasan;
 
     const [filter, setFilter] = useState(false);
 
     const [params, setParams] = useState({
         cari: "",
-        status: "",
+        rating: "",
 
         dari_tanggal: "",
         sampai_tanggal: "",
     });
     const reload = useCallback(
         debounce((query) => {
-            router.get(route("admin.pesanan-pelanggan"), query, {
+            router.get(route("admin.kelola-ulasan"), query, {
                 preserveState: true,
                 preserveScroll: true,
             });
@@ -39,86 +40,53 @@ export default function Index(props) {
             selector: (row, index) => index + 1,
         },
         {
-            name: "Kode Pesanan",
+            name: "Foto",
             width: "120px",
             wrap: true,
-            selector: (row) => row.kd_pesanan,
+            selector: (row) => <img src={"/storage/" + row.foto} alt="" />,
         },
         {
-            name: "Nama Pemesan",
+            name: "Nama Pengulas",
             width: "120px",
             wrap: true,
-            selector: (row) => row.user.name,
+            selector: (row) => row.nama,
         },
         {
-            name: "Jumlah Pesanan",
-            width: "130px",
+            name: "Ulasan",
+            width: "400px",
             wrap: true,
-            selector: (row) => row.detail_pesanan_count + " Paket di pesan",
+            selector: (row) => row.ulasan,
         },
         {
-            name: "Tanggal Pesanan",
-            width: "120px",
+            name: "Rating",
+            width: "230px",
             wrap: true,
-            selector: (row) => moment(row.tgl_pesanan).format("DD-MMMM-YYYY"),
-        },
-
-        {
-            name: "Total Pembayaran",
-            wrap: true,
-            width: "150px",
             selector: (row) => (
-                <CurrencyInput
-                    value={row.total_pembayaran}
-                    className="border-none"
+                <StyledRating
                     disabled
-                    prefix="Rp. "
+                    value={row.rating}
+                    name="simple-controlled"
                 />
             ),
         },
         {
-            name: "Status Pembayaran",
+            name: "Tanggal ulasan",
+            width: "140px",
             wrap: true,
-            width: "130px",
-            selector: (row) => row.status_pembayaran,
+            selector: (row) => moment(row.tgl_ulasan).format("DD-MMMM-YYYY"),
         },
-        {
-            name: "Status Pemesanan",
-            wrap: true,
-            selector: (row) => row.status_pemesanan,
-        },
-        {
-            name: "Bukti Pembayaran",
-            wrap: true,
-            selector: (row) =>
-                row.invoice?.bukti_pembayaran && (
-                    <>
-                        <a
-                            href={"/storage/" + row.invoice.bukti_pembayaran}
-                            target="_blank"
-                        >
-                            <img
-                                src={"/storage/" + row.invoice.bukti_pembayaran}
-                                alt=""
-                                className="w-20 h-20 object-cover"
-                            />
-                        </a>
-                    </>
-                ),
-        },
+
         {
             name: "Aksi",
 
             selector: (row) => (
                 <div className="flex gap-3">
                     <Link
-                        href={route(
-                            "admin.detail-pesanan-pelanggan",
-                            row.kd_pesanan
-                        )}
-                        className="bg-blue-500 text-white py-2 px-3 rounded-md"
+                        method="post"
+                        href={route("admin.delete-ulasan", row.id)}
+                        className="bg-red-500 text-white py-2 px-3 rounded-md"
                     >
-                        Lihat
+                        Delete
                     </Link>
                 </div>
             ),
@@ -142,20 +110,18 @@ export default function Index(props) {
                             className="w-[50px] md:w-[150px] h-[55px] "
                             labelId="demo-simple-select-label"
                             id="demo-simple-select"
-                            value={params.status}
+                            value={params.rating}
                             onChange={(e) =>
-                                setParams({ ...params, status: e })
+                                setParams({ ...params, rating: e })
                             }
                             label="Age"
                         >
-                            <MenuItem value="">Status Pemsanan</MenuItem>
-                            <MenuItem value={"selesai"}>Selesai</MenuItem>
-                            <MenuItem value={"belum selesai"}>
-                                Belum Selesai
-                            </MenuItem>
-                            <MenuItem value={"di batalkan"}>
-                                Di batalkan
-                            </MenuItem>
+                            <MenuItem value="">Pilih Rating</MenuItem>
+                            <MenuItem value={"5"}>5</MenuItem>
+                            <MenuItem value={"4"}>4</MenuItem>
+                            <MenuItem value={"3"}>3</MenuItem>
+                            <MenuItem value={"2"}>2</MenuItem>
+                            <MenuItem value={"1"}>1</MenuItem>
                         </Select>
                     </FormControl>
 
@@ -176,12 +142,6 @@ export default function Index(props) {
                             <Cancel color="inherit" fontSize="inherit" />
                         </button>
                     )}
-                    <Link
-                        href={route("admin.cetak-pesanan", { ...params })}
-                        className="text-2xl bg-green-500 py-2 px-2 rounded-md text-white"
-                    >
-                        <Print color="inherit" fontSize="inherit" />
-                    </Link>
                 </div>
                 {filter && (
                     <div className="flex justify-end gap-3 my-3">
@@ -213,7 +173,7 @@ export default function Index(props) {
                     dense
                     highlightOnHover
                     pagination
-                    data={pesanan}
+                    data={ulasan}
                     columns={columns}
                 />
             </div>
@@ -222,5 +182,5 @@ export default function Index(props) {
 }
 
 Index.layout = (page) => (
-    <Authenticated children={page} title="Pesanan Pelanggan" />
+    <Authenticated children={page} title="Kelola Ulasan" />
 );
